@@ -1,0 +1,1384 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Inteligência de Mercado — Porto Belo — 1º Semestre 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --black: #0A0A0A; --black-soft: #171717;
+    --red: #DC2626; --red-dark: #991B1B; --red-soft: #FEE2E2; --red-pale: #FEF2F2;
+    --gold: #D97706; --gold-soft: #FEF3C7; --gold-bright: #F59E0B;
+    --white: #FFFFFF;
+    --gray-50: #FAFAFA; --gray-100: #F5F5F5; --gray-150: #EDEDED;
+    --gray-200: #E5E5E5; --gray-300: #D4D4D4; --gray-400: #A3A3A3;
+    --gray-500: #737373; --gray-600: #525252; --gray-700: #404040; --gray-800: #262626;
+    --green: #059669; --green-soft: #D1FAE5; --green-text: #065f46;
+    --blue: #2563EB; --blue-soft: #DBEAFE;
+    --container: 1100px; --gutter: 32px;
+    --radius: 14px; --radius-lg: 20px;
+  }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'Inter', -apple-system, sans-serif;
+    color: var(--black); background: var(--gray-50);
+    -webkit-font-smoothing: antialiased; line-height: 1.5;
+  }
+
+  /* NAV */
+  .nav {
+    position: sticky; top: 0; z-index: 50;
+    background: rgba(10,10,10,0.97);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(255,255,255,0.07);
+  }
+  .nav-inner {
+    max-width: var(--container); margin: 0 auto;
+    padding: 14px var(--gutter);
+    display: flex; align-items: center; justify-content: space-between; gap: 16px;
+  }
+  .brand { display: flex; align-items: center; gap: 10px; font-weight: 800; font-size: 14px; color: #fff; letter-spacing: -0.02em; }
+  .brand-mark {
+    width: 26px; height: 26px; background: var(--red); border-radius: 6px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 12px; font-weight: 900; color: white;
+  }
+  .nav-badge {
+    font-size: 11px; font-weight: 600; color: var(--gray-400);
+    letter-spacing: 0.08em; text-transform: uppercase;
+    padding: 5px 12px; border: 1px solid rgba(255,255,255,0.1); border-radius: 999px;
+  }
+  .nav-links { display: flex; gap: 2px; list-style: none; }
+  .nav-links a {
+    color: var(--gray-500); text-decoration: none; font-size: 12.5px; font-weight: 500;
+    padding: 6px 12px; border-radius: 999px; transition: color 150ms, background 150ms;
+  }
+  .nav-links a:hover { color: white; background: rgba(255,255,255,0.08); }
+
+  .container { max-width: var(--container); margin: 0 auto; padding: 0 var(--gutter); }
+
+  /* HERO */
+  .hero {
+    background: var(--black); color: var(--white);
+    padding: 72px 0 64px; position: relative; overflow: hidden;
+  }
+  .hero::before {
+    content: ""; position: absolute; top: -200px; right: -160px;
+    width: 520px; height: 520px;
+    background: radial-gradient(circle, rgba(220,38,38,0.15) 0%, transparent 65%);
+    pointer-events: none;
+  }
+  .hero::after {
+    content: ""; position: absolute; bottom: 0; left: 0; right: 0; height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(220,38,38,0.35), transparent);
+  }
+  .hero-eyebrow {
+    display: inline-flex; align-items: center; gap: 10px;
+    font-size: 11px; text-transform: uppercase; letter-spacing: 0.18em;
+    font-weight: 600; color: var(--gray-400); margin-bottom: 22px;
+  }
+  .hero-eyebrow::before { content: ""; width: 28px; height: 1.5px; background: var(--red); }
+  .hero-eyebrow span { color: var(--red); }
+  .hero h1 {
+    font-size: clamp(42px, 6.5vw, 76px);
+    line-height: 0.95; letter-spacing: -0.045em; font-weight: 900; max-width: 780px;
+  }
+  .hero h1 .accent { color: var(--red); }
+  .hero-sub { margin-top: 18px; font-size: 16px; color: var(--gray-400); max-width: 520px; line-height: 1.6; }
+  .hero-stats {
+    display: grid; grid-template-columns: repeat(4, 1fr);
+    gap: 0; margin-top: 48px;
+    border-top: 1px solid rgba(255,255,255,0.07);
+    padding-top: 36px;
+  }
+  .hero-stat { padding-right: 32px; }
+  .hero-stat + .hero-stat { padding-left: 32px; border-left: 1px solid rgba(255,255,255,0.07); }
+  .hero-stat .hs-label { font-size: 11px; text-transform: uppercase; letter-spacing: 0.14em; color: var(--gray-500); margin-bottom: 8px; }
+  .hero-stat .hs-val { font-size: clamp(20px, 2.5vw, 28px); font-weight: 800; letter-spacing: -0.03em; color: white; line-height: 1; }
+  .hero-stat .hs-val.gold { color: var(--gold-bright); }
+  .hero-stat .hs-sub { font-size: 11.5px; color: var(--gray-600); margin-top: 6px; }
+
+  /* SECTIONS */
+  section { padding: 64px 0; border-bottom: 1px solid var(--gray-200); background: var(--white); }
+  section.alt { background: var(--gray-50); }
+  section:last-of-type { border-bottom: 0; }
+
+  .section-eyebrow {
+    display: inline-flex; align-items: center; gap: 7px;
+    font-size: 11px; font-weight: 700; text-transform: uppercase;
+    letter-spacing: 0.14em; color: var(--red);
+    padding: 4px 11px; background: var(--red-pale); border-radius: 999px; margin-bottom: 14px;
+  }
+  .section-eyebrow::before { content: ""; width: 6px; height: 6px; background: var(--red); border-radius: 50%; }
+  .section-title { font-size: clamp(24px, 3.2vw, 36px); line-height: 1.08; letter-spacing: -0.03em; font-weight: 800; color: var(--black); }
+  .section-sub { font-size: 14.5px; color: var(--gray-500); max-width: 540px; line-height: 1.6; margin-top: 8px; margin-bottom: 36px; }
+
+  /* OVERVIEW METRICS */
+  .metrics-split {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 36px;
+  }
+  .metric-block {
+    border-radius: var(--radius-lg); padding: 28px 24px;
+    border: 1px solid;
+  }
+  .metric-block.disp { background: var(--white); border-color: var(--gray-200); }
+  .metric-block.vend { background: var(--black); border-color: transparent; }
+  .metric-block-header {
+    display: flex; align-items: center; gap: 8px;
+    margin-bottom: 20px; padding-bottom: 16px; border-bottom: 1px solid;
+  }
+  .metric-block.disp .metric-block-header { border-color: var(--gray-150); }
+  .metric-block.vend .metric-block-header { border-color: rgba(255,255,255,0.08); }
+  .block-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+  .block-dot.red { background: var(--red); }
+  .block-dot.gold { background: var(--gold-bright); }
+  .block-title { font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.12em; }
+  .metric-block.disp .block-title { color: var(--gray-500); }
+  .metric-block.vend .block-title { color: var(--gray-500); }
+  .metric-row { display: flex; justify-content: space-between; align-items: baseline; padding: 11px 0; border-bottom: 1px solid; }
+  .metric-block.disp .metric-row { border-color: var(--gray-100); }
+  .metric-block.vend .metric-row { border-color: rgba(255,255,255,0.05); }
+  .metric-row:last-child { border-bottom: none; padding-bottom: 0; }
+  .metric-name { font-size: 13px; font-weight: 500; }
+  .metric-block.disp .metric-name { color: var(--gray-600); }
+  .metric-block.vend .metric-name { color: var(--gray-500); }
+  .metric-val { font-size: 15px; font-weight: 700; letter-spacing: -0.015em; }
+  .metric-block.disp .metric-val { color: var(--black); }
+  .metric-block.vend .metric-val { color: var(--white); }
+  .metric-val.highlight { color: var(--gold-bright) !important; }
+  .metric-val.red { color: var(--red) !important; }
+
+  /* VSO BAR */
+  .vso-bar-wrap { margin-top: 20px; }
+  .vso-label-row { display: flex; justify-content: space-between; margin-bottom: 8px; }
+  .vso-label { font-size: 12px; font-weight: 600; color: var(--gray-600); }
+  .vso-pct { font-size: 13px; font-weight: 800; color: var(--red); }
+  .vso-track { height: 8px; background: var(--gray-100); border-radius: 999px; overflow: hidden; }
+  .vso-fill { height: 100%; border-radius: 999px; background: linear-gradient(90deg, var(--red), var(--gold-bright)); }
+
+  /* HORIZONTAL BAR CHARTS */
+  .chart-card {
+    background: var(--white); border: 1px solid var(--gray-200);
+    border-radius: var(--radius-lg); padding: 28px 24px; margin-top: 16px;
+  }
+  .chart-card-title { font-size: 14px; font-weight: 700; color: var(--black); margin-bottom: 4px; }
+  .chart-card-sub { font-size: 12px; color: var(--gray-500); margin-bottom: 22px; }
+  .legend { display: flex; gap: 18px; margin-bottom: 20px; flex-wrap: wrap; }
+  .legend-item { display: flex; align-items: center; gap: 6px; font-size: 12px; font-weight: 500; color: var(--gray-600); }
+  .legend-dot { width: 10px; height: 10px; border-radius: 3px; flex-shrink: 0; }
+  .legend-dot.red { background: var(--red); }
+  .legend-dot.gold { background: var(--gold-bright); }
+
+  .hbar-list { display: flex; flex-direction: column; gap: 16px; }
+  .hbar-row { display: grid; grid-template-columns: 140px 1fr; gap: 14px; align-items: center; }
+  .hbar-label { font-size: 12.5px; font-weight: 600; color: var(--black); line-height: 1.3; text-align: right; }
+  .hbar-col { display: flex; flex-direction: column; gap: 4px; }
+  .hbar-pair { display: flex; align-items: center; gap: 8px; }
+  .hbar-track { flex: 1; height: 8px; background: var(--gray-100); border-radius: 999px; overflow: hidden; }
+  .hbar-fill { height: 100%; border-radius: 999px; transition: width 0.7s cubic-bezier(0.22,1,0.36,1); }
+  .hbar-fill.red { background: var(--red); }
+  .hbar-fill.gold { background: var(--gold-bright); }
+  .hbar-val { font-size: 11.5px; font-weight: 600; white-space: nowrap; min-width: 70px; }
+  .hbar-val.red { color: var(--red-dark); }
+  .hbar-val.gold { color: var(--gold); }
+  .hbar-divider { border: none; border-top: 1px solid var(--gray-100); margin: 4px 0; }
+
+  /* BAIRROS TABLE */
+  .bairros-table { width: 100%; border-collapse: separate; border-spacing: 0; margin-top: 36px; }
+  .bairros-table thead th {
+    font-size: 11px; font-weight: 700; text-transform: uppercase;
+    letter-spacing: 0.1em; color: var(--gray-500);
+    padding: 0 14px 12px 14px; text-align: left;
+    border-bottom: 2px solid var(--gray-200);
+  }
+  .bairros-table thead th:not(:first-child) { text-align: right; }
+  .bairros-table tbody tr { transition: background 150ms; }
+  .bairros-table tbody tr:hover { background: var(--gray-50); }
+  .bairros-table tbody td {
+    padding: 14px; font-size: 13.5px; color: var(--black);
+    border-bottom: 1px solid var(--gray-100);
+  }
+  .bairros-table tbody td:not(:first-child) { text-align: right; }
+  .bairros-table td .bname { font-weight: 700; display: block; }
+  .bairros-table td .bsub { font-size: 11px; color: var(--gray-400); font-weight: 400; }
+  .rank { display: inline-flex; align-items: center; justify-content: center; width: 20px; height: 20px; border-radius: 5px; font-size: 10px; font-weight: 700; margin-right: 8px; vertical-align: middle; background: var(--gray-100); color: var(--gray-500); }
+  .rank.top1 { background: var(--red); color: white; }
+  .rank.top2 { background: var(--gray-800); color: white; }
+  .rank.top3 { background: var(--gray-600); color: white; }
+  .badge { display: inline-flex; align-items: center; font-size: 11px; font-weight: 700; padding: 3px 9px; border-radius: 999px; }
+  .badge.high { background: var(--green-soft); color: var(--green-text); }
+  .badge.mid { background: var(--gold-soft); color: #78350f; }
+  .badge.low { background: var(--red-soft); color: var(--red-dark); }
+  .vso-mini-track { height: 5px; background: var(--gray-100); border-radius: 999px; overflow: hidden; margin-top: 4px; width: 80px; display: inline-block; vertical-align: middle; }
+  .vso-mini-fill { height: 100%; border-radius: 999px; }
+  .vso-mini-fill.high { background: var(--green); }
+  .vso-mini-fill.mid { background: var(--gold-bright); }
+  .vso-mini-fill.low { background: var(--red); }
+
+  /* INSIGHTS */
+  .insight-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 36px; }
+  .insight-card {
+    background: var(--white); border: 1px solid var(--gray-200);
+    border-radius: var(--radius-lg); padding: 24px 22px;
+    border-top: 3px solid;
+  }
+  .insight-card.ig-green { border-top-color: var(--green); }
+  .insight-card.ig-red { border-top-color: var(--red); }
+  .insight-card.ig-gold { border-top-color: var(--gold-bright); }
+  .insight-card.ig-black { border-top-color: var(--black); }
+  .insight-card.ig-blue { border-top-color: var(--blue); }
+  .insight-tag { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.12em; padding: 4px 10px; border-radius: 999px; display: inline-flex; margin-bottom: 12px; }
+  .insight-tag.green { background: var(--green-soft); color: var(--green-text); }
+  .insight-tag.red { background: var(--red-soft); color: var(--red-dark); }
+  .insight-tag.gold { background: var(--gold-soft); color: #78350f; }
+  .insight-tag.black { background: var(--gray-100); color: var(--gray-700); }
+  .insight-tag.blue { background: var(--blue-soft); color: #1e40af; }
+  .insight-num { font-size: 28px; font-weight: 900; letter-spacing: -0.04em; line-height: 1; margin-bottom: 8px; }
+  .insight-num.green { color: var(--green); }
+  .insight-num.red { color: var(--red); }
+  .insight-num.gold { color: var(--gold); }
+  .insight-title { font-size: 14px; font-weight: 700; color: var(--black); margin-bottom: 8px; line-height: 1.3; }
+  .insight-body { font-size: 13px; color: var(--gray-600); line-height: 1.6; }
+  .insight-body strong { color: var(--black); }
+
+  /* NOTE */
+  .data-note { font-size: 11px; color: var(--gray-400); margin-top: 20px; padding: 10px 14px; background: var(--gray-100); border-radius: 8px; border-left: 3px solid var(--gray-300); line-height: 1.5; }
+
+  /* FOOTER */
+  .footer { background: var(--black); padding: 36px 0; }
+  .footer-inner {
+    max-width: var(--container); margin: 0 auto; padding: 0 var(--gutter);
+    display: flex; justify-content: space-between; align-items: center; gap: 20px; flex-wrap: wrap;
+  }
+  .footer-brand { display: flex; align-items: center; gap: 10px; }
+  .footer-brand span { font-weight: 700; color: white; font-size: 13px; }
+  .footer-info { font-size: 11.5px; color: var(--gray-600); }
+  .footer-info strong { color: var(--gray-400); }
+
+  @media (max-width: 860px) {
+    .hero-stats { grid-template-columns: repeat(2, 1fr); }
+    .hero-stat + .hero-stat { border-left: none; padding-left: 0; }
+    .metrics-split { grid-template-columns: 1fr; }
+    .insight-grid { grid-template-columns: repeat(2, 1fr); }
+    .hbar-row { grid-template-columns: 100px 1fr; }
+  }
+  @media (max-width: 600px) {
+    :root { --gutter: 18px; }
+    .insight-grid { grid-template-columns: 1fr; }
+    .hero-stats { grid-template-columns: 1fr 1fr; }
+    .nav-links { display: none; }
+    .hbar-row { grid-template-columns: 90px 1fr; }
+    .hbar-label { font-size: 11px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav">
+  <div class="nav-inner">
+    <div class="brand">
+      <div class="brand-mark">D</div>
+      DWV Inteligência de Mercado
+    </div>
+    <div class="nav-badge">Porto Belo · 1º Semestre 2026</div>
+    <ul class="nav-links">
+      <li><a href="#visao-geral">Visão Geral</a></li>
+      <li><a href="#comparativo">Cidades</a></li>
+      <li><a href="#dormitorios">Dormitórios</a></li>
+      <li><a href="#bairros">Bairros</a></li>
+      <li><a href="#suites">Suítes</a></li>
+      <li><a href="#area">Área Privativa</a></li>
+      <li><a href="#insights">Insights</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="container">
+    <div class="hero-eyebrow">
+      Inteligência de Mercado DWV &nbsp;·&nbsp; <span>Imóveis Novos &amp; Lançamentos</span>
+    </div>
+    <h1>Mercado Imobiliário<br>de <span class="accent">Porto Belo</span></h1>
+    <p class="hero-sub">Panorama do mercado de imóveis novos e lançamentos no 1º semestre de 2026 — Janeiro a Junho — com dados extraídos da plataforma DWV.</p>
+    <div class="hero-stats">
+      <div class="hero-stat">
+        <div class="hs-label">Unidades Vendidas</div>
+        <div class="hs-val gold">2.850</div>
+        <div class="hs-sub">no 1º semestre 2026</div>
+      </div>
+      <div class="hero-stat">
+        <div class="hs-label">Volume Financeiro Vendido</div>
+        <div class="hs-val gold">R$ 2,5 bilhões</div>
+        <div class="hs-sub">absorção no período</div>
+      </div>
+      <div class="hero-stat">
+        <div class="hs-label">Valor Médio do m² Vendido</div>
+        <div class="hs-val gold">R$ 14.712/m²</div>
+        <div class="hs-sub">+9,7% acima do disponível</div>
+      </div>
+      <div class="hero-stat">
+        <div class="hs-label">Estoque Disponível</div>
+        <div class="hs-val">15.017</div>
+        <div class="hs-sub">unidades em oferta ativa</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- VISÃO GERAL -->
+<section id="visao-geral">
+  <div class="container">
+    <div class="section-eyebrow">Visão Geral</div>
+    <h2 class="section-title">Números do 1º Semestre de 2026</h2>
+    <p class="section-sub">Comparativo completo entre o estoque disponível (ofertado) e as unidades absorvidas pelo mercado (vendidas) — Janeiro a Junho de 2026.</p>
+
+    <div class="metrics-split">
+      <!-- DISPONÍVEL -->
+      <div class="metric-block disp">
+        <div class="metric-block-header">
+          <div class="block-dot red"></div>
+          <div class="block-title">Disponível — Estoque Ofertado</div>
+        </div>
+        <div class="metric-row">
+          <span class="metric-name">Quantidade de unidades</span>
+          <span class="metric-val">15.017</span>
+        </div>
+        <div class="metric-row">
+          <span class="metric-name">Valor total do estoque</span>
+          <span class="metric-val">R$ 17,6 bilhões</span>
+        </div>
+        <div class="metric-row">
+          <span class="metric-name">Valor médio por unidade</span>
+          <span class="metric-val">R$ 1.172.467</span>
+        </div>
+        <div class="metric-row">
+          <span class="metric-name">Valor mediano por unidade</span>
+          <span class="metric-val">R$ 771.463</span>
+        </div>
+        <div class="metric-row">
+          <span class="metric-name">Valor médio do m²</span>
+          <span class="metric-val red">R$ 13.416/m²</span>
+        </div>
+      </div>
+      <!-- VENDIDO -->
+      <div class="metric-block vend">
+        <div class="metric-block-header">
+          <div class="block-dot gold"></div>
+          <div class="block-title">Vendido — Absorção do Mercado</div>
+        </div>
+        <div class="metric-row">
+          <span class="metric-name">Quantidade de unidades</span>
+          <span class="metric-val">2.850</span>
+        </div>
+        <div class="metric-row">
+          <span class="metric-name">Valor total absorvido</span>
+          <span class="metric-val">R$ 2,5 bilhões</span>
+        </div>
+        <div class="metric-row">
+          <span class="metric-name">Valor médio por unidade</span>
+          <span class="metric-val">R$ 875.671</span>
+        </div>
+        <div class="metric-row">
+          <span class="metric-name">Valor mediano por unidade</span>
+          <span class="metric-val">R$ 617.151</span>
+        </div>
+        <div class="metric-row">
+          <span class="metric-name">Valor médio do m²</span>
+          <span class="metric-val highlight">R$ 14.712/m² ↑</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- VSO -->
+    <div class="chart-card" style="margin-top:16px;">
+      <div class="chart-card-title">Taxa de Absorção do Mercado (VSO)</div>
+      <div class="chart-card-sub">Proporção de unidades vendidas em relação ao total ofertado no período</div>
+      <div class="vso-bar-wrap">
+        <div class="vso-label-row">
+          <span class="vso-label">2.850 vendidas de 17.867 no mercado</span>
+          <span class="vso-pct">16,0%</span>
+        </div>
+        <div class="vso-track"><div class="vso-fill" style="width:16%"></div></div>
+      </div>
+      <div style="margin-top:14px; font-size:12.5px; color:var(--gray-500); line-height:1.6;">
+        O valor médio do m² <strong style="color:var(--black);">vendido (R$ 14.712)</strong> supera em <strong style="color:var(--green);">+9,7%</strong> o valor médio do m² <strong style="color:var(--black);">disponível (R$ 13.416)</strong> — indicando que o mercado pagou acima do preço médio do estoque atual, sinal de valorização e demanda qualificada.
+      </div>
+    </div>
+    <div class="data-note">ⓘ Dados extraídos da plataforma DWV. "Vendido" = unidade retirada da disponibilidade na base DWV. Cobre exclusivamente imóveis novos e em lançamento. Período: 01/01/2026 – 01/07/2026.</div>
+  </div>
+</section>
+
+<!-- COMPARATIVO POR CIDADES -->
+<section id="comparativo" style="background:var(--white);">
+  <div class="container">
+    <div class="section-eyebrow">Comparativo Regional</div>
+    <h2 class="section-title">Porto Belo no Ranking das Principais Cidades</h2>
+    <p class="section-sub">Mesmo período: 01/01/2026 a 01/07/2026 — imóveis novos e lançamentos monitorados pela plataforma DWV em cada cidade.</p>
+
+    <!-- DESTAQUE: posições de Porto Belo -->
+    <div style="background:var(--black); border-radius:var(--radius-lg); padding:28px 24px; margin-bottom:20px; position:relative; overflow:hidden;">
+      <div style="position:absolute; top:-120px; right:-120px; width:320px; height:320px; background:radial-gradient(circle, rgba(220,38,38,0.13) 0%, transparent 65%); pointer-events:none;"></div>
+      <div style="font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:0.14em; color:var(--gray-600); margin-bottom:18px;">Porto Belo — Posição no Ranking Regional (8 cidades)</div>
+      <div style="display:grid; grid-template-columns:repeat(4,1fr); gap:24px;">
+        <div>
+          <div style="font-size:11px; font-weight:600; text-transform:uppercase; letter-spacing:0.1em; color:var(--gray-600); margin-bottom:8px;">Valor Total Vendido</div>
+          <div style="font-size:52px; font-weight:900; color:var(--gold-bright); letter-spacing:-0.05em; line-height:1;">#1</div>
+          <div style="font-size:12px; color:var(--gray-500); margin-top:6px;">R$ 2,50 bilhões</div>
+        </div>
+        <div>
+          <div style="font-size:11px; font-weight:600; text-transform:uppercase; letter-spacing:0.1em; color:var(--gray-600); margin-bottom:8px;">Unidades Vendidas</div>
+          <div style="font-size:52px; font-weight:900; color:var(--gold-bright); letter-spacing:-0.05em; line-height:1;">#1</div>
+          <div style="font-size:12px; color:var(--gray-500); margin-top:6px;">2.850 unidades</div>
+        </div>
+        <div>
+          <div style="font-size:11px; font-weight:600; text-transform:uppercase; letter-spacing:0.1em; color:var(--gray-600); margin-bottom:8px;">Valor m² Vendido</div>
+          <div style="font-size:52px; font-weight:900; color:var(--white); letter-spacing:-0.05em; line-height:1;">#5</div>
+          <div style="font-size:12px; color:var(--gray-500); margin-top:6px;">R$ 14.712/m²</div>
+        </div>
+        <div>
+          <div style="font-size:11px; font-weight:600; text-transform:uppercase; letter-spacing:0.1em; color:var(--gray-600); margin-bottom:8px;">VSO — Taxa de Absorção</div>
+          <div style="font-size:52px; font-weight:900; color:var(--white); letter-spacing:-0.05em; line-height:1;">#5</div>
+          <div style="font-size:12px; color:var(--gray-500); margin-top:6px;">16,0% de absorção</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TABELA COMPLETA -->
+    <table class="bairros-table" style="margin-top:0;">
+      <thead>
+        <tr>
+          <th>Cidade</th>
+          <th>Val. Total Vendido</th>
+          <th>Unid. Vendidas</th>
+          <th>VSO</th>
+          <th>Vm² Vendido</th>
+          <th>Ticket Médio Vendido</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr style="background:var(--red-pale);">
+          <td>
+            <span class="rank top1">1</span>
+            <span class="bname" style="color:var(--red);">Porto Belo ★</span>
+            <span class="bsub">SC · Cobertura ampla (~99% das incorporadoras)</span>
+          </td>
+          <td style="font-weight:800; color:var(--red);">R$ 2,50 bi</td>
+          <td style="font-weight:800; color:var(--red);">2.850</td>
+          <td><span class="badge mid">16,0%</span></td>
+          <td>R$ 14.712/m²</td>
+          <td>R$ 875.671</td>
+        </tr>
+        <tr>
+          <td>
+            <span class="rank top2">2</span>
+            <span class="bname">Itajaí</span>
+            <span class="bsub">SC</span>
+          </td>
+          <td style="font-weight:600;">R$ 2,04 bi</td>
+          <td style="font-weight:600;">1.254</td>
+          <td><span class="badge mid">17,8%</span></td>
+          <td>R$ 16.908/m²</td>
+          <td>R$ 1.629.867</td>
+        </tr>
+        <tr>
+          <td>
+            <span class="rank top3">3</span>
+            <span class="bname">Itapema</span>
+            <span class="bsub">SC</span>
+          </td>
+          <td style="font-weight:600;">R$ 1,98 bi</td>
+          <td style="font-weight:600;">1.529</td>
+          <td><span class="badge mid">15,5%</span></td>
+          <td>R$ 14.460/m²</td>
+          <td>R$ 1.294.755</td>
+        </tr>
+        <tr>
+          <td>
+            <span class="rank">4</span>
+            <span class="bname">Balneário Camboriú</span>
+            <span class="bsub">SC · Mercado de alto padrão</span>
+          </td>
+          <td>R$ 1,50 bi</td>
+          <td>348</td>
+          <td><span class="badge mid">16,2%</span></td>
+          <td style="color:var(--gold); font-weight:700;">R$ 25.625/m² 🏆</td>
+          <td>R$ 4.324.337</td>
+        </tr>
+        <tr>
+          <td>
+            <span class="rank">5</span>
+            <span class="bname">Curitiba</span>
+            <span class="bsub">PR</span>
+          </td>
+          <td>R$ 1,05 bi</td>
+          <td>926</td>
+          <td><span class="badge mid">15,1%</span></td>
+          <td>R$ 13.693/m²</td>
+          <td>R$ 1.136.927</td>
+        </tr>
+        <tr>
+          <td>
+            <span class="rank">6</span>
+            <span class="bname">Navegantes</span>
+            <span class="bsub">SC</span>
+          </td>
+          <td>R$ 301 mi</td>
+          <td>322</td>
+          <td><span class="badge high">21,6%</span></td>
+          <td>R$ 11.631/m²</td>
+          <td>R$ 934.346</td>
+        </tr>
+        <tr>
+          <td>
+            <span class="rank">7</span>
+            <span class="bname">Gramado</span>
+            <span class="bsub">RS · Turismo e segunda residência</span>
+          </td>
+          <td>R$ 222 mi</td>
+          <td>158</td>
+          <td><span class="badge high">18,9%</span></td>
+          <td>R$ 19.693/m²</td>
+          <td>R$ 1.403.171</td>
+        </tr>
+        <tr style="opacity:0.7;">
+          <td>
+            <span class="rank" style="font-size:9px;">ref.</span>
+            <span class="bname">São Paulo *</span>
+            <span class="bsub">SP · Base DWV restrita ao alto padrão — dados não representativos do mercado total</span>
+          </td>
+          <td>R$ 89,8 mi</td>
+          <td>51</td>
+          <td><span class="badge low">0,4%</span></td>
+          <td>R$ 15.226/m²</td>
+          <td>R$ 1.760.207</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <!-- GRÁFICOS LADO A LADO -->
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-top:16px;">
+
+      <!-- Valor Vendido -->
+      <div class="chart-card" style="margin-top:0;">
+        <div class="chart-card-title">Valor Total Vendido por Cidade</div>
+        <div class="chart-card-sub">Volume financeiro absorvido — 1º Semestre 2026</div>
+        <div class="hbar-list">
+          <div class="hbar-row">
+            <div class="hbar-label" style="color:var(--red);font-weight:800;">Porto Belo</div>
+            <div class="hbar-col"><div class="hbar-pair"><div class="hbar-track"><div class="hbar-fill red" style="width:100%"></div></div><span class="hbar-val red" style="font-weight:800;">R$ 2,50 bi #1</span></div></div>
+          </div>
+          <div class="hbar-row">
+            <div class="hbar-label">Itajaí</div>
+            <div class="hbar-col"><div class="hbar-pair"><div class="hbar-track"><div class="hbar-fill red" style="width:81.9%"></div></div><span class="hbar-val red">R$ 2,04 bi</span></div></div>
+          </div>
+          <div class="hbar-row">
+            <div class="hbar-label">Itapema</div>
+            <div class="hbar-col"><div class="hbar-pair"><div class="hbar-track"><div class="hbar-fill red" style="width:79.3%"></div></div><span class="hbar-val red">R$ 1,98 bi</span></div></div>
+          </div>
+          <div class="hbar-row">
+            <div class="hbar-label">Bal. Camboriú</div>
+            <div class="hbar-col"><div class="hbar-pair"><div class="hbar-track"><div class="hbar-fill red" style="width:60.3%"></div></div><span class="hbar-val red">R$ 1,50 bi</span></div></div>
+          </div>
+          <div class="hbar-row">
+            <div class="hbar-label">Curitiba</div>
+            <div class="hbar-col"><div class="hbar-pair"><div class="hbar-track"><div class="hbar-fill red" style="width:42.2%"></div></div><span class="hbar-val red">R$ 1,05 bi</span></div></div>
+          </div>
+          <div class="hbar-row">
+            <div class="hbar-label">Navegantes</div>
+            <div class="hbar-col"><div class="hbar-pair"><div class="hbar-track"><div class="hbar-fill red" style="width:12.1%"></div></div><span class="hbar-val red">R$ 301 mi</span></div></div>
+          </div>
+          <div class="hbar-row">
+            <div class="hbar-label">Gramado</div>
+            <div class="hbar-col"><div class="hbar-pair"><div class="hbar-track"><div class="hbar-fill red" style="width:8.9%"></div></div><span class="hbar-val red">R$ 222 mi</span></div></div>
+          </div>
+          <div class="hbar-row" style="opacity:0.5;">
+            <div class="hbar-label">São Paulo *</div>
+            <div class="hbar-col"><div class="hbar-pair"><div class="hbar-track"><div class="hbar-fill red" style="width:3.6%"></div></div><span class="hbar-val red">R$ 89,8 mi</span></div></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Qtd Vendida -->
+      <div class="chart-card" style="margin-top:0;">
+        <div class="chart-card-title">Unidades Vendidas por Cidade</div>
+        <div class="chart-card-sub">Quantidade absorvida no mercado — 1º Semestre 2026</div>
+        <div class="hbar-list">
+          <div class="hbar-row">
+            <div class="hbar-label" style="color:var(--red);font-weight:800;">Porto Belo</div>
+            <div class="hbar-col"><div class="hbar-pair"><div class="hbar-track"><div class="hbar-fill red" style="width:100%"></div></div><span class="hbar-val red" style="font-weight:800;">2.850 #1</span></div></div>
+          </div>
+          <div class="hbar-row">
+            <div class="hbar-label">Itapema</div>
+            <div class="hbar-col"><div class="hbar-pair"><div class="hbar-track"><div class="hbar-fill red" style="width:53.6%"></div></div><span class="hbar-val red">1.529</span></div></div>
+          </div>
+          <div class="hbar-row">
+            <div class="hbar-label">Itajaí</div>
+            <div class="hbar-col"><div class="hbar-pair"><div class="hbar-track"><div class="hbar-fill red" style="width:44.0%"></div></div><span class="hbar-val red">1.254</span></div></div>
+          </div>
+          <div class="hbar-row">
+            <div class="hbar-label">Curitiba</div>
+            <div class="hbar-col"><div class="hbar-pair"><div class="hbar-track"><div class="hbar-fill red" style="width:32.5%"></div></div><span class="hbar-val red">926</span></div></div>
+          </div>
+          <div class="hbar-row">
+            <div class="hbar-label">Bal. Camboriú</div>
+            <div class="hbar-col"><div class="hbar-pair"><div class="hbar-track"><div class="hbar-fill red" style="width:12.2%"></div></div><span class="hbar-val red">348</span></div></div>
+          </div>
+          <div class="hbar-row">
+            <div class="hbar-label">Navegantes</div>
+            <div class="hbar-col"><div class="hbar-pair"><div class="hbar-track"><div class="hbar-fill red" style="width:11.3%"></div></div><span class="hbar-val red">322</span></div></div>
+          </div>
+          <div class="hbar-row">
+            <div class="hbar-label">Gramado</div>
+            <div class="hbar-col"><div class="hbar-pair"><div class="hbar-track"><div class="hbar-fill red" style="width:5.5%"></div></div><span class="hbar-val red">158</span></div></div>
+          </div>
+          <div class="hbar-row" style="opacity:0.5;">
+            <div class="hbar-label">São Paulo *</div>
+            <div class="hbar-col"><div class="hbar-pair"><div class="hbar-track"><div class="hbar-fill red" style="width:1.8%"></div></div><span class="hbar-val red">51</span></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- VM² chart -->
+    <div class="chart-card">
+      <div class="chart-card-title">Valor Médio do m² Vendido — Ranking por Cidade</div>
+      <div class="chart-card-sub">Quanto o mercado pagou por metro quadrado em cada cidade — indicador de sofisticação e valorização da praça</div>
+      <div class="hbar-list">
+        <div class="hbar-row">
+          <div class="hbar-label">Bal. Camboriú</div>
+          <div class="hbar-col"><div class="hbar-pair"><div class="hbar-track"><div class="hbar-fill gold" style="width:100%"></div></div><span class="hbar-val gold" style="font-weight:700;">R$ 25.625/m² 🏆</span></div></div>
+        </div>
+        <div class="hbar-row">
+          <div class="hbar-label">Gramado</div>
+          <div class="hbar-col"><div class="hbar-pair"><div class="hbar-track"><div class="hbar-fill gold" style="width:76.9%"></div></div><span class="hbar-val gold">R$ 19.693/m²</span></div></div>
+        </div>
+        <div class="hbar-row">
+          <div class="hbar-label">Itajaí</div>
+          <div class="hbar-col"><div class="hbar-pair"><div class="hbar-track"><div class="hbar-fill gold" style="width:66.0%"></div></div><span class="hbar-val gold">R$ 16.908/m²</span></div></div>
+        </div>
+        <div class="hbar-row" style="opacity:0.55;">
+          <div class="hbar-label">São Paulo *</div>
+          <div class="hbar-col"><div class="hbar-pair"><div class="hbar-track"><div class="hbar-fill gold" style="width:59.4%"></div></div><span class="hbar-val gold">R$ 15.226/m²</span></div></div>
+        </div>
+        <div class="hbar-row">
+          <div class="hbar-label" style="color:var(--red); font-weight:800;">Porto Belo</div>
+          <div class="hbar-col"><div class="hbar-pair"><div class="hbar-track"><div class="hbar-fill gold" style="width:57.4%"></div></div><span class="hbar-val gold" style="font-weight:800;">R$ 14.712/m² #5</span></div></div>
+        </div>
+        <div class="hbar-row">
+          <div class="hbar-label">Itapema</div>
+          <div class="hbar-col"><div class="hbar-pair"><div class="hbar-track"><div class="hbar-fill gold" style="width:56.4%"></div></div><span class="hbar-val gold">R$ 14.460/m²</span></div></div>
+        </div>
+        <div class="hbar-row">
+          <div class="hbar-label">Curitiba</div>
+          <div class="hbar-col"><div class="hbar-pair"><div class="hbar-track"><div class="hbar-fill gold" style="width:53.4%"></div></div><span class="hbar-val gold">R$ 13.693/m²</span></div></div>
+        </div>
+        <div class="hbar-row">
+          <div class="hbar-label">Navegantes</div>
+          <div class="hbar-col"><div class="hbar-pair"><div class="hbar-track"><div class="hbar-fill gold" style="width:45.4%"></div></div><span class="hbar-val gold">R$ 11.631/m²</span></div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="data-note">
+      * <strong>São Paulo:</strong> a base da DWV em SP é concentrada em imóveis de alto padrão e não representa o mercado total da cidade. Por isso, o volume registrado é baixo (51 unidades, R$ 89,8 mi) e o ticket médio elevado (R$ 1,76M) reflete esse nicho específico — não o comportamento geral do mercado paulistano. A comparação com Porto Belo, onde a DWV monitora praticamente 100% das incorporadoras, deve ser feita com essa ressalva. · VSO = Velocidade Sobre Oferta [Vendidas ÷ (Vendidas + Disponíveis)]
+    </div>
+  </div>
+</section>
+
+<!-- DORMITÓRIOS -->
+<section class="alt" id="dormitorios">
+  <div class="container">
+    <div class="section-eyebrow">Tipologias</div>
+    <h2 class="section-title">Por Dormitórios</h2>
+    <p class="section-sub">Distribuição de unidades disponíveis e vendidas por número de dormitórios — revelando quais tipologias têm maior oferta e maior absorção.</p>
+
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px;">
+      <!-- Quantidade -->
+      <div class="chart-card" style="margin-top:0;">
+        <div class="chart-card-title">Quantidade — Disponível vs. Vendido</div>
+        <div class="chart-card-sub">Nº de unidades por tipologia de dormitório</div>
+        <div class="legend">
+          <div class="legend-item"><div class="legend-dot red"></div>Disponível</div>
+          <div class="legend-item"><div class="legend-dot gold"></div>Vendido</div>
+        </div>
+        <div class="hbar-list">
+          <!-- 0 dorms -->
+          <div class="hbar-row">
+            <div class="hbar-label">Studio<br><span style="font-weight:400;font-size:11px;color:var(--gray-400)">0 dorms</span></div>
+            <div class="hbar-col">
+              <div class="hbar-pair">
+                <div class="hbar-track"><div class="hbar-fill red" style="width:47%"></div></div>
+                <span class="hbar-val red">~3.200</span>
+              </div>
+              <div class="hbar-pair">
+                <div class="hbar-track"><div class="hbar-fill gold" style="width:13%"></div></div>
+                <span class="hbar-val gold">~900</span>
+              </div>
+            </div>
+          </div>
+          <!-- 1 dorm -->
+          <div class="hbar-row">
+            <div class="hbar-label">1 Dormitório</div>
+            <div class="hbar-col">
+              <div class="hbar-pair">
+                <div class="hbar-track"><div class="hbar-fill red" style="width:100%"></div></div>
+                <span class="hbar-val red">6.745 ★</span>
+              </div>
+              <div class="hbar-pair">
+                <div class="hbar-track"><div class="hbar-fill gold" style="width:22.9%"></div></div>
+                <span class="hbar-val gold">1.541 ★</span>
+              </div>
+            </div>
+          </div>
+          <!-- 2 dorms -->
+          <div class="hbar-row">
+            <div class="hbar-label">2 Dormitórios</div>
+            <div class="hbar-col">
+              <div class="hbar-pair">
+                <div class="hbar-track"><div class="hbar-fill red" style="width:39%"></div></div>
+                <span class="hbar-val red">~2.600</span>
+              </div>
+              <div class="hbar-pair">
+                <div class="hbar-track"><div class="hbar-fill gold" style="width:16%"></div></div>
+                <span class="hbar-val gold">~1.100</span>
+              </div>
+            </div>
+          </div>
+          <!-- 3 dorms -->
+          <div class="hbar-row">
+            <div class="hbar-label">3 Dormitórios</div>
+            <div class="hbar-col">
+              <div class="hbar-pair">
+                <div class="hbar-track"><div class="hbar-fill red" style="width:43%"></div></div>
+                <span class="hbar-val red">~2.900</span>
+              </div>
+              <div class="hbar-pair">
+                <div class="hbar-track"><div class="hbar-fill gold" style="width:15.5%"></div></div>
+                <span class="hbar-val gold">~1.050</span>
+              </div>
+            </div>
+          </div>
+          <!-- 4+ dorms -->
+          <div class="hbar-row">
+            <div class="hbar-label">4+ Dormitórios</div>
+            <div class="hbar-col">
+              <div class="hbar-pair">
+                <div class="hbar-track"><div class="hbar-fill red" style="width:13%"></div></div>
+                <span class="hbar-val red">~870</span>
+              </div>
+              <div class="hbar-pair">
+                <div class="hbar-track"><div class="hbar-fill gold" style="width:11%"></div></div>
+                <span class="hbar-val gold">~750</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Valor -->
+      <div class="chart-card" style="margin-top:0;">
+        <div class="chart-card-title">Valor Total — Disponível vs. Vendido</div>
+        <div class="chart-card-sub">Volume financeiro ofertado e absorvido por tipologia</div>
+        <div class="legend">
+          <div class="legend-item"><div class="legend-dot red"></div>Disponível</div>
+          <div class="legend-item"><div class="legend-dot gold"></div>Vendido</div>
+        </div>
+        <div class="hbar-list">
+          <!-- 0 dorms -->
+          <div class="hbar-row">
+            <div class="hbar-label">Studio<br><span style="font-weight:400;font-size:11px;color:var(--gray-400)">0 dorms</span></div>
+            <div class="hbar-col">
+              <div class="hbar-pair">
+                <div class="hbar-track"><div class="hbar-fill red" style="width:95%"></div></div>
+                <span class="hbar-val red">~R$ 5,5 bi</span>
+              </div>
+              <div class="hbar-pair">
+                <div class="hbar-track"><div class="hbar-fill gold" style="width:14%"></div></div>
+                <span class="hbar-val gold">~R$ 800 mi</span>
+              </div>
+            </div>
+          </div>
+          <!-- 1 dorm -->
+          <div class="hbar-row">
+            <div class="hbar-label">1 Dormitório</div>
+            <div class="hbar-col">
+              <div class="hbar-pair">
+                <div class="hbar-track"><div class="hbar-fill red" style="width:54%"></div></div>
+                <span class="hbar-val red">~R$ 3,0 bi</span>
+              </div>
+              <div class="hbar-pair">
+                <div class="hbar-track"><div class="hbar-fill gold" style="width:24%"></div></div>
+                <span class="hbar-val gold">~R$ 1,3 bi</span>
+              </div>
+            </div>
+          </div>
+          <!-- 2 dorms -->
+          <div class="hbar-row">
+            <div class="hbar-label">2 Dormitórios</div>
+            <div class="hbar-col">
+              <div class="hbar-pair">
+                <div class="hbar-track"><div class="hbar-fill red" style="width:20%"></div></div>
+                <span class="hbar-val red">~R$ 1,1 bi</span>
+              </div>
+              <div class="hbar-pair">
+                <div class="hbar-track"><div class="hbar-fill gold" style="width:18%"></div></div>
+                <span class="hbar-val gold">~R$ 1,0 bi</span>
+              </div>
+            </div>
+          </div>
+          <!-- 3 dorms -->
+          <div class="hbar-row">
+            <div class="hbar-label">3 Dormitórios</div>
+            <div class="hbar-col">
+              <div class="hbar-pair">
+                <div class="hbar-track"><div class="hbar-fill red" style="width:85%"></div></div>
+                <span class="hbar-val red">R$ 4,66 bi ★</span>
+              </div>
+              <div class="hbar-pair">
+                <div class="hbar-track"><div class="hbar-fill gold" style="width:14%"></div></div>
+                <span class="hbar-val gold">R$ 773 mi ★</span>
+              </div>
+            </div>
+          </div>
+          <!-- 4+ dorms -->
+          <div class="hbar-row">
+            <div class="hbar-label">4+ Dormitórios</div>
+            <div class="hbar-col">
+              <div class="hbar-pair">
+                <div class="hbar-track"><div class="hbar-fill red" style="width:44%"></div></div>
+                <span class="hbar-val red">~R$ 2,4 bi</span>
+              </div>
+              <div class="hbar-pair">
+                <div class="hbar-track"><div class="hbar-fill gold" style="width:14%"></div></div>
+                <span class="hbar-val gold">~R$ 800 mi</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="data-note">★ Valores exatos (tooltip do B.I.) · Demais valores são estimativas visuais dos gráficos</div>
+  </div>
+</section>
+
+<!-- BAIRROS -->
+<section id="bairros">
+  <div class="container">
+    <div class="section-eyebrow">Localização</div>
+    <h2 class="section-title">Por Bairros</h2>
+    <p class="section-sub">Desempenho por bairro — comparando oferta, absorção e taxa de liquidez. Quanto maior o VSO, mais rápido o bairro está vendendo.</p>
+
+    <table class="bairros-table">
+      <thead>
+        <tr>
+          <th>Bairro</th>
+          <th>Qtd. Disponível</th>
+          <th>Qtd. Vendida</th>
+          <th>VSO (Absorção)</th>
+          <th>Valor Ofertado</th>
+          <th>Valor Vendido</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>
+            <span class="rank top1">1</span>
+            <span class="bname">Perequê</span>
+            <span class="bsub">Maior mercado de Porto Belo</span>
+          </td>
+          <td>~4.700</td>
+          <td>~1.100</td>
+          <td>
+            <span class="badge mid">~19%</span>
+            <div class="vso-mini-track" style="width:60px;margin-left:4px;display:inline-block;vertical-align:middle;">
+              <div class="vso-mini-fill mid" style="width:19%"></div>
+            </div>
+          </td>
+          <td>R$ 8,31 bi ★</td>
+          <td>R$ 1,30 bi ★</td>
+        </tr>
+        <tr>
+          <td>
+            <span class="rank top2">2</span>
+            <span class="bname">Balneário Perequê</span>
+          </td>
+          <td>~2.100</td>
+          <td>~350</td>
+          <td>
+            <span class="badge low">~14%</span>
+            <div class="vso-mini-track" style="width:60px;margin-left:4px;display:inline-block;vertical-align:middle;">
+              <div class="vso-mini-fill low" style="width:14%"></div>
+            </div>
+          </td>
+          <td>~R$ 4,0 bi</td>
+          <td>~R$ 300 mi</td>
+        </tr>
+        <tr>
+          <td>
+            <span class="rank top3">3</span>
+            <span class="bname">Sertão Santa Luzia</span>
+            <span class="bsub">Maior liquidez da cidade</span>
+          </td>
+          <td>1.759 ★</td>
+          <td>1.144 ★</td>
+          <td>
+            <span class="badge high">39% ★</span>
+            <div class="vso-mini-track" style="width:60px;margin-left:4px;display:inline-block;vertical-align:middle;">
+              <div class="vso-mini-fill high" style="width:39%"></div>
+            </div>
+          </td>
+          <td>~R$ 1,5 bi</td>
+          <td>~R$ 600 mi</td>
+        </tr>
+        <tr>
+          <td>
+            <span class="rank">4</span>
+            <span class="bname">Vila Nova</span>
+          </td>
+          <td>~1.500</td>
+          <td>~700</td>
+          <td>
+            <span class="badge mid">~32%</span>
+            <div class="vso-mini-track" style="width:60px;margin-left:4px;display:inline-block;vertical-align:middle;">
+              <div class="vso-mini-fill mid" style="width:32%"></div>
+            </div>
+          </td>
+          <td>~R$ 1,5 bi</td>
+          <td>~R$ 700 mi</td>
+        </tr>
+        <tr>
+          <td>
+            <span class="rank">5</span>
+            <span class="bname">Jardim Dourado</span>
+          </td>
+          <td>~1.450</td>
+          <td>~300</td>
+          <td>
+            <span class="badge low">~17%</span>
+            <div class="vso-mini-track" style="width:60px;margin-left:4px;display:inline-block;vertical-align:middle;">
+              <div class="vso-mini-fill low" style="width:17%"></div>
+            </div>
+          </td>
+          <td>~R$ 2,3 bi</td>
+          <td>~R$ 200 mi</td>
+        </tr>
+        <tr>
+          <td>
+            <span class="rank">6</span>
+            <span class="bname">Vivapark Porto Belo</span>
+          </td>
+          <td>~1.100</td>
+          <td>~150</td>
+          <td>
+            <span class="badge low">~12%</span>
+            <div class="vso-mini-track" style="width:60px;margin-left:4px;display:inline-block;vertical-align:middle;">
+              <div class="vso-mini-fill low" style="width:12%"></div>
+            </div>
+          </td>
+          <td>~R$ 2,0 bi</td>
+          <td>~R$ 200 mi</td>
+        </tr>
+        <tr>
+          <td>
+            <span class="rank">7</span>
+            <span class="bname">Balneário Perecobi</span>
+          </td>
+          <td>~400</td>
+          <td>~300</td>
+          <td>
+            <span class="badge high">~43%</span>
+            <div class="vso-mini-track" style="width:60px;margin-left:4px;display:inline-block;vertical-align:middle;">
+              <div class="vso-mini-fill high" style="width:43%"></div>
+            </div>
+          </td>
+          <td>~R$ 500 mi</td>
+          <td>~R$ 300 mi</td>
+        </tr>
+        <tr>
+          <td>
+            <span class="rank">8</span>
+            <span class="bname">Alto Perequê</span>
+          </td>
+          <td>~350</td>
+          <td>~100</td>
+          <td>
+            <span class="badge mid">~22%</span>
+            <div class="vso-mini-track" style="width:60px;margin-left:4px;display:inline-block;vertical-align:middle;">
+              <div class="vso-mini-fill mid" style="width:22%"></div>
+            </div>
+          </td>
+          <td>~R$ 300 mi</td>
+          <td>~R$ 100 mi</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <!-- Bairros bar chart -->
+    <div class="chart-card">
+      <div class="chart-card-title">Volume de Unidades por Bairro</div>
+      <div class="chart-card-sub">Comparativo de estoque disponível (vermelho) e unidades vendidas (dourado)</div>
+      <div class="legend">
+        <div class="legend-item"><div class="legend-dot red"></div>Disponível</div>
+        <div class="legend-item"><div class="legend-dot gold"></div>Vendido</div>
+      </div>
+      <div class="hbar-list">
+        <div class="hbar-row">
+          <div class="hbar-label">Perequê</div>
+          <div class="hbar-col">
+            <div class="hbar-pair"><div class="hbar-track"><div class="hbar-fill red" style="width:100%"></div></div><span class="hbar-val red">~4.700</span></div>
+            <div class="hbar-pair"><div class="hbar-track"><div class="hbar-fill gold" style="width:23.4%"></div></div><span class="hbar-val gold">~1.100</span></div>
+          </div>
+        </div>
+        <div class="hbar-row">
+          <div class="hbar-label">Balneário Perequê</div>
+          <div class="hbar-col">
+            <div class="hbar-pair"><div class="hbar-track"><div class="hbar-fill red" style="width:44.7%"></div></div><span class="hbar-val red">~2.100</span></div>
+            <div class="hbar-pair"><div class="hbar-track"><div class="hbar-fill gold" style="width:7.4%"></div></div><span class="hbar-val gold">~350</span></div>
+          </div>
+        </div>
+        <div class="hbar-row">
+          <div class="hbar-label">Sertão Santa Luzia</div>
+          <div class="hbar-col">
+            <div class="hbar-pair"><div class="hbar-track"><div class="hbar-fill red" style="width:37.4%"></div></div><span class="hbar-val red">1.759 ★</span></div>
+            <div class="hbar-pair"><div class="hbar-track"><div class="hbar-fill gold" style="width:24.3%"></div></div><span class="hbar-val gold">1.144 ★</span></div>
+          </div>
+        </div>
+        <div class="hbar-row">
+          <div class="hbar-label">Vila Nova</div>
+          <div class="hbar-col">
+            <div class="hbar-pair"><div class="hbar-track"><div class="hbar-fill red" style="width:31.9%"></div></div><span class="hbar-val red">~1.500</span></div>
+            <div class="hbar-pair"><div class="hbar-track"><div class="hbar-fill gold" style="width:14.9%"></div></div><span class="hbar-val gold">~700</span></div>
+          </div>
+        </div>
+        <div class="hbar-row">
+          <div class="hbar-label">Jardim Dourado</div>
+          <div class="hbar-col">
+            <div class="hbar-pair"><div class="hbar-track"><div class="hbar-fill red" style="width:30.9%"></div></div><span class="hbar-val red">~1.450</span></div>
+            <div class="hbar-pair"><div class="hbar-track"><div class="hbar-fill gold" style="width:6.4%"></div></div><span class="hbar-val gold">~300</span></div>
+          </div>
+        </div>
+        <div class="hbar-row">
+          <div class="hbar-label">Vivapark Porto Belo</div>
+          <div class="hbar-col">
+            <div class="hbar-pair"><div class="hbar-track"><div class="hbar-fill red" style="width:23.4%"></div></div><span class="hbar-val red">~1.100</span></div>
+            <div class="hbar-pair"><div class="hbar-track"><div class="hbar-fill gold" style="width:3.2%"></div></div><span class="hbar-val gold">~150</span></div>
+          </div>
+        </div>
+        <div class="hbar-row">
+          <div class="hbar-label">Balneário Perecobi</div>
+          <div class="hbar-col">
+            <div class="hbar-pair"><div class="hbar-track"><div class="hbar-fill red" style="width:8.5%"></div></div><span class="hbar-val red">~400</span></div>
+            <div class="hbar-pair"><div class="hbar-track"><div class="hbar-fill gold" style="width:6.4%"></div></div><span class="hbar-val gold">~300</span></div>
+          </div>
+        </div>
+        <div class="hbar-row">
+          <div class="hbar-label">Alto Perequê</div>
+          <div class="hbar-col">
+            <div class="hbar-pair"><div class="hbar-track"><div class="hbar-fill red" style="width:7.4%"></div></div><span class="hbar-val red">~350</span></div>
+            <div class="hbar-pair"><div class="hbar-track"><div class="hbar-fill gold" style="width:2.1%"></div></div><span class="hbar-val gold">~100</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="data-note">★ Valores exatos (tooltip do B.I.) · Demais valores são estimativas visuais · VSO = Velocidade sobre Oferta [Vendidas/(Vendidas+Disponíveis)]</div>
+  </div>
+</section>
+
+<!-- SUÍTES -->
+<section class="alt" id="suites">
+  <div class="container">
+    <div class="section-eyebrow">Perfil do Produto</div>
+    <h2 class="section-title">Por Suítes</h2>
+    <p class="section-sub">Nível de sofisticação das unidades ofertadas e vendidas — o número de suítes revela o padrão de produto que o mercado demanda.</p>
+
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px;">
+      <!-- Suítes quantidade -->
+      <div class="chart-card" style="margin-top:0;">
+        <div class="chart-card-title">Quantidade — Disponível vs. Vendido</div>
+        <div class="chart-card-sub">Nº de unidades por número de suítes</div>
+        <div class="legend">
+          <div class="legend-item"><div class="legend-dot red"></div>Disponível</div>
+          <div class="legend-item"><div class="legend-dot gold"></div>Vendido</div>
+        </div>
+        <div class="hbar-list">
+          <div class="hbar-row">
+            <div class="hbar-label">0 Suítes</div>
+            <div class="hbar-col">
+              <div class="hbar-pair"><div class="hbar-track"><div class="hbar-fill red" style="width:100%"></div></div><span class="hbar-val red">7.223 ★</span></div>
+              <div class="hbar-pair"><div class="hbar-track"><div class="hbar-fill gold" style="width:22.6%"></div></div><span class="hbar-val gold">1.630 ★</span></div>
+            </div>
+          </div>
+          <div class="hbar-row">
+            <div class="hbar-label">1 Suíte</div>
+            <div class="hbar-col">
+              <div class="hbar-pair"><div class="hbar-track"><div class="hbar-fill red" style="width:31.8%"></div></div><span class="hbar-val red">~2.300</span></div>
+              <div class="hbar-pair"><div class="hbar-track"><div class="hbar-fill gold" style="width:12.5%"></div></div><span class="hbar-val gold">~900</span></div>
+            </div>
+          </div>
+          <div class="hbar-row">
+            <div class="hbar-label">2 Suítes</div>
+            <div class="hbar-col">
+              <div class="hbar-pair"><div class="hbar-track"><div class="hbar-fill red" style="width:36%"></div></div><span class="hbar-val red">~2.600</span></div>
+              <div class="hbar-pair"><div class="hbar-track"><div class="hbar-fill gold" style="width:9%"></div></div><span class="hbar-val gold">~650</span></div>
+            </div>
+          </div>
+          <div class="hbar-row">
+            <div class="hbar-label">3 Suítes</div>
+            <div class="hbar-col">
+              <div class="hbar-pair"><div class="hbar-track"><div class="hbar-fill red" style="width:36%"></div></div><span class="hbar-val red">~2.600</span></div>
+              <div class="hbar-pair"><div class="hbar-track"><div class="hbar-fill gold" style="width:9%"></div></div><span class="hbar-val gold">~650</span></div>
+            </div>
+          </div>
+          <div class="hbar-row">
+            <div class="hbar-label">4 Suítes</div>
+            <div class="hbar-col">
+              <div class="hbar-pair"><div class="hbar-track"><div class="hbar-fill red" style="width:13.8%"></div></div><span class="hbar-val red">~1.000</span></div>
+              <div class="hbar-pair"><div class="hbar-track"><div class="hbar-fill gold" style="width:4.8%"></div></div><span class="hbar-val gold">~350</span></div>
+            </div>
+          </div>
+          <div class="hbar-row">
+            <div class="hbar-label">5+ Suítes</div>
+            <div class="hbar-col">
+              <div class="hbar-pair"><div class="hbar-track"><div class="hbar-fill red" style="width:5.5%"></div></div><span class="hbar-val red">~400</span></div>
+              <div class="hbar-pair"><div class="hbar-track"><div class="hbar-fill gold" style="width:4.8%"></div></div><span class="hbar-val gold">~350</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Suítes valor -->
+      <div class="chart-card" style="margin-top:0;">
+        <div class="chart-card-title">Valor Total — Disponível vs. Vendido</div>
+        <div class="chart-card-sub">Volume financeiro por número de suítes</div>
+        <div class="legend">
+          <div class="legend-item"><div class="legend-dot red"></div>Disponível</div>
+          <div class="legend-item"><div class="legend-dot gold"></div>Vendido</div>
+        </div>
+        <div class="hbar-list">
+          <div class="hbar-row">
+            <div class="hbar-label">0 Suítes</div>
+            <div class="hbar-col">
+              <div class="hbar-pair"><div class="hbar-track"><div class="hbar-fill red" style="width:57.7%"></div></div><span class="hbar-val red">R$ 3,35 bi ★</span></div>
+              <div class="hbar-pair"><div class="hbar-track"><div class="hbar-fill gold" style="width:13.9%"></div></div><span class="hbar-val gold">R$ 808 mi ★</span></div>
+            </div>
+          </div>
+          <div class="hbar-row">
+            <div class="hbar-label">1 Suíte</div>
+            <div class="hbar-col">
+              <div class="hbar-pair"><div class="hbar-track"><div class="hbar-fill red" style="width:69%"></div></div><span class="hbar-val red">~R$ 4,0 bi</span></div>
+              <div class="hbar-pair"><div class="hbar-track"><div class="hbar-fill gold" style="width:17.2%"></div></div><span class="hbar-val gold">~R$ 1,0 bi</span></div>
+            </div>
+          </div>
+          <div class="hbar-row">
+            <div class="hbar-label">2 Suítes</div>
+            <div class="hbar-col">
+              <div class="hbar-pair"><div class="hbar-track"><div class="hbar-fill red" style="width:19%"></div></div><span class="hbar-val red">~R$ 1,1 bi</span></div>
+              <div class="hbar-pair"><div class="hbar-track"><div class="hbar-fill gold" style="width:10.3%"></div></div><span class="hbar-val gold">~R$ 600 mi</span></div>
+            </div>
+          </div>
+          <div class="hbar-row">
+            <div class="hbar-label">3 Suítes</div>
+            <div class="hbar-col">
+              <div class="hbar-pair"><div class="hbar-track"><div class="hbar-fill red" style="width:100%"></div></div><span class="hbar-val red">~R$ 5,8 bi</span></div>
+              <div class="hbar-pair"><div class="hbar-track"><div class="hbar-fill gold" style="width:22.4%"></div></div><span class="hbar-val gold">~R$ 1,3 bi</span></div>
+            </div>
+          </div>
+          <div class="hbar-row">
+            <div class="hbar-label">4 Suítes</div>
+            <div class="hbar-col">
+              <div class="hbar-pair"><div class="hbar-track"><div class="hbar-fill red" style="width:56.9%"></div></div><span class="hbar-val red">~R$ 3,3 bi</span></div>
+              <div class="hbar-pair"><div class="hbar-track"><div class="hbar-fill gold" style="width:10.3%"></div></div><span class="hbar-val gold">~R$ 600 mi</span></div>
+            </div>
+          </div>
+          <div class="hbar-row">
+            <div class="hbar-label">5+ Suítes</div>
+            <div class="hbar-col">
+              <div class="hbar-pair"><div class="hbar-track"><div class="hbar-fill red" style="width:5.2%"></div></div><span class="hbar-val red">~R$ 300 mi</span></div>
+              <div class="hbar-pair"><div class="hbar-track"><div class="hbar-fill gold" style="width:1.7%"></div></div><span class="hbar-val gold">~R$ 100 mi</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="data-note">★ Valores exatos (tooltip do B.I.) · Demais valores são estimativas visuais dos gráficos</div>
+  </div>
+</section>
+
+<!-- ÁREA PRIVATIVA -->
+<section id="area">
+  <div class="container">
+    <div class="section-eyebrow">Metragem</div>
+    <h2 class="section-title">Por Área Privativa</h2>
+    <p class="section-sub">Quais faixas de metragem concentram mais oferta e mais absorção — revelando o tamanho de unidade preferido pelo mercado de Porto Belo.</p>
+
+    <div class="chart-card">
+      <div class="chart-card-title">Quantidade — Disponível vs. Vendido (por Faixa de Área)</div>
+      <div class="chart-card-sub">Nº de unidades por faixa de m² privativo</div>
+      <div class="legend">
+        <div class="legend-item"><div class="legend-dot red"></div>Disponível</div>
+        <div class="legend-item"><div class="legend-dot gold"></div>Vendido</div>
+      </div>
+      <div class="hbar-list">
+        <div class="hbar-row">
+          <div class="hbar-label">Até 20m²</div>
+          <div class="hbar-col">
+            <div class="hbar-pair"><div class="hbar-track"><div class="hbar-fill red" style="width:4%"></div></div><span class="hbar-val red">~200</span></div>
+            <div class="hbar-pair"><div class="hbar-track"><div class="hbar-fill gold" style="width:2%"></div></div><span class="hbar-val gold">~100</span></div>
+          </div>
+        </div>
+        <div class="hbar-row">
+          <div class="hbar-label">20 a 40m²</div>
+          <div class="hbar-col">
+            <div class="hbar-pair"><div class="hbar-track"><div class="hbar-fill red" style="width:60.3%"></div></div><span class="hbar-val red">3.017 ★</span></div>
+            <div class="hbar-pair"><div class="hbar-track"><div class="hbar-fill gold" style="width:25%"></div></div><span class="hbar-val gold">1.251 ★</span></div>
+          </div>
+        </div>
+        <div class="hbar-row">
+          <div class="hbar-label" style="font-size:13px; font-weight:800;">40 a 60m²</div>
+          <div class="hbar-col">
+            <div class="hbar-pair"><div class="hbar-track"><div class="hbar-fill red" style="width:100%"></div></div><span class="hbar-val red" style="color:var(--red-dark);font-weight:800;">~5.000 ★ maior</span></div>
+            <div class="hbar-pair"><div class="hbar-track"><div class="hbar-fill gold" style="width:20%"></div></div><span class="hbar-val gold">~1.000</span></div>
+          </div>
+        </div>
+        <div class="hbar-row">
+          <div class="hbar-label">60 a 80m²</div>
+          <div class="hbar-col">
+            <div class="hbar-pair"><div class="hbar-track"><div class="hbar-fill red" style="width:40%"></div></div><span class="hbar-val red">~2.000</span></div>
+            <div class="hbar-pair"><div class="hbar-track"><div class="hbar-fill gold" style="width:21%"></div></div><span class="hbar-val gold">~1.050</span></div>
+          </div>
+        </div>
+        <div class="hbar-row">
+          <div class="hbar-label">80 a 100m²</div>
+          <div class="hbar-col">
+            <div class="hbar-pair"><div class="hbar-track"><div class="hbar-fill red" style="width:14%"></div></div><span class="hbar-val red">~700</span></div>
+            <div class="hbar-pair"><div class="hbar-track"><div class="hbar-fill gold" style="width:7%"></div></div><span class="hbar-val gold">~350</span></div>
+          </div>
+        </div>
+        <div class="hbar-row">
+          <div class="hbar-label">100 a 120m²</div>
+          <div class="hbar-col">
+            <div class="hbar-pair"><div class="hbar-track"><div class="hbar-fill red" style="width:34%"></div></div><span class="hbar-val red">~1.700</span></div>
+            <div class="hbar-pair"><div class="hbar-track"><div class="hbar-fill gold" style="width:12%"></div></div><span class="hbar-val gold">~600</span></div>
+          </div>
+        </div>
+        <div class="hbar-row">
+          <div class="hbar-label">120 a 140m²</div>
+          <div class="hbar-col">
+            <div class="hbar-pair"><div class="hbar-track"><div class="hbar-fill red" style="width:30%"></div></div><span class="hbar-val red">~1.500</span></div>
+            <div class="hbar-pair"><div class="hbar-track"><div class="hbar-fill gold" style="width:7%"></div></div><span class="hbar-val gold">~350</span></div>
+          </div>
+        </div>
+        <div class="hbar-row">
+          <div class="hbar-label">140 a 160m²</div>
+          <div class="hbar-col">
+            <div class="hbar-pair"><div class="hbar-track"><div class="hbar-fill red" style="width:6%"></div></div><span class="hbar-val red">~300</span></div>
+            <div class="hbar-pair"><div class="hbar-track"><div class="hbar-fill gold" style="width:2%"></div></div><span class="hbar-val gold">~100</span></div>
+          </div>
+        </div>
+        <div class="hbar-row">
+          <div class="hbar-label">160 a 180m²</div>
+          <div class="hbar-col">
+            <div class="hbar-pair"><div class="hbar-track"><div class="hbar-fill red" style="width:4%"></div></div><span class="hbar-val red">~200</span></div>
+            <div class="hbar-pair"><div class="hbar-track"><div class="hbar-fill gold" style="width:2%"></div></div><span class="hbar-val gold">~100</span></div>
+          </div>
+        </div>
+        <div class="hbar-row">
+          <div class="hbar-label">180 a 200m²</div>
+          <div class="hbar-col">
+            <div class="hbar-pair"><div class="hbar-track"><div class="hbar-fill red" style="width:4%"></div></div><span class="hbar-val red">~200</span></div>
+            <div class="hbar-pair"><div class="hbar-track"><div class="hbar-fill gold" style="width:1%"></div></div><span class="hbar-val gold">~50</span></div>
+          </div>
+        </div>
+        <div class="hbar-row">
+          <div class="hbar-label">Acima de 200m²</div>
+          <div class="hbar-col">
+            <div class="hbar-pair"><div class="hbar-track"><div class="hbar-fill red" style="width:8%"></div></div><span class="hbar-val red">~400</span></div>
+            <div class="hbar-pair"><div class="hbar-track"><div class="hbar-fill gold" style="width:2%"></div></div><span class="hbar-val gold">~100</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="data-note">★ Valores exatos (tooltip do B.I.) · Demais valores são estimativas visuais · A faixa 40-60m² lidera o estoque disponível de Porto Belo</div>
+  </div>
+</section>
+
+<!-- INSIGHTS -->
+<section class="alt" id="insights">
+  <div class="container">
+    <div class="section-eyebrow">Análise Estratégica</div>
+    <h2 class="section-title">Principais Insights do Mercado</h2>
+    <p class="section-sub">Leituras estratégicas com base nos dados do 1º semestre de 2026 — Porto Belo, imóveis novos e lançamentos (base DWV).</p>
+
+    <div class="insight-grid">
+      <!-- Insight 1 -->
+      <div class="insight-card ig-green">
+        <div class="insight-tag green">Valorização</div>
+        <div class="insight-num green">+9,7%</div>
+        <div class="insight-title">m² vendido supera o m² disponível</div>
+        <div class="insight-body">O valor médio do m² vendido (<strong>R$ 14.712</strong>) está <strong>9,7% acima</strong> do m² disponível (<strong>R$ 13.416</strong>). Isso indica que o mercado está pagando mais por metro quadrado do que o estoque atual oferece — sinal de valorização real e demanda qualificada.</div>
+      </div>
+      <!-- Insight 2 -->
+      <div class="insight-card ig-green">
+        <div class="insight-tag green">Alta Liquidez</div>
+        <div class="insight-num green">39%</div>
+        <div class="insight-title">Sertão Santa Luzia lidera em absorção</div>
+        <div class="insight-body">Com <strong>1.144 unidades vendidas</strong> de 1.759 disponíveis, o Sertão Santa Luzia registra a maior taxa de absorção (VSO) da cidade: <strong>~39%</strong>. É o bairro mais dinâmico de Porto Belo no 1º semestre.</div>
+      </div>
+      <!-- Insight 3 -->
+      <div class="insight-card ig-gold">
+        <div class="insight-tag gold">Volume</div>
+        <div class="insight-num gold">R$ 2,5 bi</div>
+        <div class="insight-title">Porto Belo movimenta R$ 2,5 bilhões em vendas</div>
+        <div class="insight-body">O mercado imobiliário novo de Porto Belo absorveu <strong>R$ 2.495.663.932</strong> em vendas no 1º semestre de 2026 — com <strong>2.850 unidades</strong> retiradas da disponibilidade nos primeiros 6 meses do ano.</div>
+      </div>
+      <!-- Insight 4 -->
+      <div class="insight-card ig-red">
+        <div class="insight-tag red">Estoque</div>
+        <div class="insight-num red">6.745</div>
+        <div class="insight-title">1 Dormitório domina a oferta</div>
+        <div class="insight-body">A tipologia de <strong>1 dormitório</strong> concentra o maior estoque disponível: <strong>6.745 unidades</strong> (quase metade do total). Com 1.541 vendas, a absorção é de ~19% — indicando oferta abundante neste segmento.</div>
+      </div>
+      <!-- Insight 5 -->
+      <div class="insight-card ig-black">
+        <div class="insight-tag black">Domínio</div>
+        <div class="insight-num" style="color:var(--black);">R$ 8,3 bi</div>
+        <div class="insight-title">Perequê concentra o maior mercado</div>
+        <div class="insight-body">Com <strong>R$ 8,31 bilhões</strong> em oferta e ~4.700 unidades disponíveis, Perequê é o bairro que comanda o mercado imobiliário de Porto Belo — responsável por <strong>R$ 1,30 bilhão</strong> das vendas do semestre.</div>
+      </div>
+      <!-- Insight 6 -->
+      <div class="insight-card ig-gold">
+        <div class="insight-tag gold">Produto</div>
+        <div class="insight-num gold">40–60m²</div>
+        <div class="insight-title">Compactos de 40-60m² lideram o estoque</div>
+        <div class="insight-body">A faixa de <strong>40 a 60m²</strong> concentra o maior volume de unidades disponíveis em Porto Belo (~5.000 uni), refletindo um mercado orientado a imóveis compactos — perfil alinhado ao turismo e segunda residência.</div>
+      </div>
+    </div>
+
+    <div class="data-note" style="margin-top:24px;">ⓘ Análises baseadas nos dados monitorados pela plataforma DWV (imóveis novos e lançamentos). Período: 01/01/2026 – 01/07/2026. Dados com ★ são valores exatos extraídos de tooltips do B.I.; demais são estimativas visuais dos gráficos. "Vendido" = unidade retirada da disponibilidade na base DWV.</div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <div class="brand-mark">D</div>
+      <span>DWV Inteligência de Mercado</span>
+    </div>
+    <div class="footer-info">
+      1º Semestre 2026 · Porto Belo – SC · Imóveis novos e lançamentos
+    </div>
+    <div class="footer-info">
+      Elaborado por <strong>DWV</strong> para <strong>Rotas Comunicação</strong>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
